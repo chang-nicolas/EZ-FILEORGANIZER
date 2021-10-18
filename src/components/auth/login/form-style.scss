@@ -1,0 +1,14 @@
+.ant-image {
+  margin: 0 auto;
+  display: block !important;
+  margin-bottom: 50px;
+}
+
+.login-form-button {
+  background-color: #00001a;
+  border: none;
+
+  &:hover {
+    background-color: #33334d;
+  }
+}
