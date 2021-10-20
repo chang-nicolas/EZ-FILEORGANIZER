@@ -1,5 +1,5 @@
 import * as requestFromServer from "./authCrud";
-import { authSlice } from "./authSlice";
+import authSlice from "./authSlice";
 
 const { actions } = authSlice;
 
@@ -9,7 +9,6 @@ export const login = (values) => (dispatch) => {
     .then(({ data }) => {
       if (data.error) dispatch(actions.setError({ error: data.error }));
       else {
-        console.log(data);
         dispatch(actions.setUser({ userData: data }));
         localStorage.setItem("auth_token", data.token);
       }
@@ -17,4 +16,12 @@ export const login = (values) => (dispatch) => {
     .catch((err) => {
       dispatch(actions.setError({ error: err }));
     });
+};
+
+export const register = (values) => (dispatch) => {
+  return requestFromServer.register(values);
+};
+
+export const singOut = () => (dispatch) => {
+  return dispatch(actions.singOut());
 };

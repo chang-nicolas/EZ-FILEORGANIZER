@@ -4,23 +4,19 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
 
 import "./App.css";
 import Login from "./components/auth/login";
-import { Provider, useSelector } from "react-redux";
-import appView from "./components/app-view";
-
-import Dashboard from "./components/dashboard";
+import { Provider } from "react-redux";
+import AppView from "./components/app-view";
 
 import store from "./store";
-import { Layout } from "antd";
 
 function App() {
   const token = localStorage.getItem("auth_token");
-
+  console.log(token);
   return (
     <Fragment>
       <Provider store={store}>
@@ -28,7 +24,7 @@ function App() {
           <Switch>
             {token ? (
               <>
-                <Route path="/app/dashboard" component={appView} />
+                <Route path="/app" component={AppView} />
                 <Redirect to="/app/dashboard" />
               </>
             ) : (

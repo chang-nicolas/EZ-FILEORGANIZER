@@ -1,0 +1,33 @@
+.ant-card-cover {
+  background-color: #c2d6d6;
+  padding: 10px;
+}
+
+.ant-card-meta-detail {
+  padding-top: 20px;
+}
+
+.ant-image {
+  margin: 0 auto;
+  display: block !important;
+  margin-bottom: 50px;
+}
+
+.login-form-button {
+  background-color: #00001a;
+  border: none;
+
+  &:hover {
+    background-color: #33334d;
+  }
+}
+
+.ant-card-bordered {
+  margin: 0px auto;
+  width: auto !important;
+  box-shadow: gray 14px 17px 29px;
+
+  &:hover {
+    box-shadow: gray 16px 20px 35px;
+  }
+}

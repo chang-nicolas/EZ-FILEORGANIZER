@@ -10,30 +10,21 @@ import {
   CalendarOutlined,
 } from "@ant-design/icons";
 
-import logo from "./logo.png";
-import "./form-style.scss";
-import { useHistory } from "react-router-dom";
+import logo from "../../../auth/login/logo.png";
+import "./style.scss";
 
-import * as actions from "../../_redux/auth/authAction";
+import * as actions from "../../../_redux/admin/AdminAction";
 import { useDispatch } from "react-redux";
 
-function RegisterForm({ pageChange }) {
-  const [userData, setUserData] = React.useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phonenumber: "",
-    address: "",
-    password: "",
-  });
+function DrawerEditForm({ onClose, record }) {
   const dispatch = useDispatch();
 
   const onFinish = async (values) => {
     values.birthdate = new Date(values.birthdate._d);
-    values.role = "user";
+    values.role = "admin";
     console.log("Received values of form: ", values);
-    await dispatch(actions.register(values));
-    pageChange("login");
+    await dispatch(actions.addAdminData(values));
+    onClose();
   };
 
   const validateMessages = {
@@ -50,15 +41,15 @@ function RegisterForm({ pageChange }) {
     <Form
       name="normal_login"
       className="login-form"
-      initialValues={{ remember: true }}
       onFinish={onFinish}
-      style={{ marginTop: "30%" }}
       validateMessages={validateMessages}
+      initialValues={record}
     >
       <Image width={200} src={logo} />
       <Form.Item
         name="firstname"
-        rules={[{ required: true, message: "Please input your Firstname!" }]}
+        // value={record.firstname}
+        rules={[{ required: true, message: "Please input Firstname!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -69,7 +60,7 @@ function RegisterForm({ pageChange }) {
 
       <Form.Item
         name="lastname"
-        rules={[{ required: true, message: "Please input your Lastname!" }]}
+        rules={[{ required: true, message: "Please input Lastname!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -88,7 +79,7 @@ function RegisterForm({ pageChange }) {
 
       <Form.Item
         name="phonenumber"
-        rules={[{ required: true, message: "Please input your Phonenumber!" }]}
+        rules={[{ required: true, message: "Please input Phonenumber!" }]}
       >
         <Input
           prefix={<PhoneOutlined className="site-form-item-icon" />}
@@ -98,7 +89,7 @@ function RegisterForm({ pageChange }) {
       </Form.Item>
       <Form.Item
         name="address"
-        rules={[{ required: true, message: "Please input your Address!" }]}
+        rules={[{ required: true, message: "Please input Address!" }]}
       >
         <Input
           prefix={<HomeOutlined className="site-form-item-icon" />}
@@ -108,8 +99,9 @@ function RegisterForm({ pageChange }) {
       </Form.Item>
 
       <Form.Item
-        name="birthdate"
-        rules={[{ required: true, message: "Please input your Birthdate!" }]}
+        name="birthdates"
+        rules={[{ required: true, message: "Please input Birthdate!" }]}
+        prefix={<CalendarOutlined className="site-form-item-icon" />}
       >
         <DatePicker
           prefix={<CalendarOutlined className="site-form-item-icon" />}
@@ -117,16 +109,16 @@ function RegisterForm({ pageChange }) {
         />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
+        rules={[{ required: true, message: "Please input Password!" }]}
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
           placeholder="Password"
           size="large"
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -148,11 +140,11 @@ function RegisterForm({ pageChange }) {
           shape="round"
           style={{ marginBottom: "50px" }}
         >
-          Register
+          Submit
         </Button>
       </Form.Item>
     </Form>
   );
 }
 
-export default RegisterForm;
+export default DrawerEditForm;

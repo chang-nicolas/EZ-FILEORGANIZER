@@ -31,6 +31,7 @@ function Login() {
                   danger
                   type="text"
                   onClick={() => pageChange("register")}
+                  style={{ marginBottom: "50px" }}
                 >
                   Don't you have account?
                 </Button>
