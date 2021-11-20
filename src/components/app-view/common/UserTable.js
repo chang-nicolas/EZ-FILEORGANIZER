@@ -79,7 +79,7 @@ function UserTable({ originData, data, setList, title }) {
   function userDelete(e, record) {
     message.loading({ content: "Deleting...", key });
     const myPromise = new Promise(async (resolve, reject) => {
-      await dispatch(actions.deleteUser(record.id));
+      await dispatch(actions.deleteUser(record.id, title));
       resolve("finished");
       reject("error");
     });
@@ -104,7 +104,18 @@ function UserTable({ originData, data, setList, title }) {
   const [panel, setPanel] = React.useState("form");
 
   async function onAddClick() {
-    await setSelectedRecord(null);
+    const tmpRecord = {
+      address: "",
+      birthdate: "",
+      email: "",
+      firstname: "",
+      lastlogin: "",
+      lastname: "",
+      password: "",
+      phonenumber: "",
+      role: "",
+    };
+    await setSelectedRecord(tmpRecord);
     setPanel("form");
     showDrawer.current();
   }

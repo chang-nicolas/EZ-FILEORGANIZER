@@ -17,6 +17,7 @@ const UserSlice = createSlice({
     setUserList: (state, action) => {
       state.isLoading = false;
       state.userList = action.payload.userListData;
+      console.log(state.userList);
       state.error = null;
     },
     deleteUser: (state, action) => {

@@ -6,6 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import "./App.css";
 import Login from "./components/auth/login";
@@ -16,7 +17,7 @@ import store from "./store";
 
 function App() {
   const token = localStorage.getItem("auth_token");
-  console.log(token);
+
   return (
     <Fragment>
       <Provider store={store}>

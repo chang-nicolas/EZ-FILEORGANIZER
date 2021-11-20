@@ -7,11 +7,12 @@ const header = {
 };
 
 export const getAdmins = () => {
-  return axios.get(`${API_URL}/auth/admins`, header);
+  return axios.get(`${API_URL}/auth/admins`);
 };
 
 export function addAdmin(values) {
   // console.log(values);
+  console.log(values);
   return axios.post(`${API_URL}/auth/add-admin`, values);
 }
 

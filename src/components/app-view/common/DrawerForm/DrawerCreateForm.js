@@ -23,7 +23,7 @@ function DrawerCreateForm({ onClose }) {
     values.birthdate = new Date(values.birthdate._d);
     values.role = "admin";
     console.log("Received values of form: ", values);
-    await dispatch(actions.addAdminData(values));
+    dispatch(actions.addAdminData(values));
     onClose();
   };
 
@@ -97,7 +97,7 @@ function DrawerCreateForm({ onClose }) {
       </Form.Item>
 
       <Form.Item
-        name="birthdates"
+        name="birthdate"
         rules={[{ required: true, message: "Please input Birthdate!" }]}
         prefix={<CalendarOutlined className="site-form-item-icon" />}
       >

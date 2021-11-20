@@ -7,10 +7,10 @@ import DrawerEditForm from "./DrawerEditForm";
 function DrawerForm({ onClose, record }) {
   return (
     <div>
-      {record ? (
-        <DrawerEditForm onClose={onClose} record={record} />
-      ) : (
+      {record.firstname == "" ? (
         <DrawerCreateForm onClose={onClose} />
+      ) : (
+        <DrawerEditForm onClose={onClose} record={record} />
       )}
     </div>
   );

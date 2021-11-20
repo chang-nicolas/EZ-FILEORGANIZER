@@ -3,7 +3,6 @@ import React from "react";
 import { Form, Input, Button, Checkbox, Image, DatePicker } from "antd";
 import {
   UserOutlined,
-  LockOutlined,
   MailOutlined,
   PhoneOutlined,
   HomeOutlined,
@@ -15,16 +14,19 @@ import "./style.scss";
 
 import * as actions from "../../../_redux/admin/AdminAction";
 import { useDispatch } from "react-redux";
+import moment from "moment";
 
 function DrawerEditForm({ onClose, record }) {
   const dispatch = useDispatch();
 
   const onFinish = async (values) => {
-    values.birthdate = new Date(values.birthdate._d);
+    // const values = { ...formdata, birthdate: formdata.birthdates };
+    // console.log(values);
+    // values.birthdate = new Date(values.birthdate._d);
     values.role = "admin";
     console.log("Received values of form: ", values);
     await dispatch(actions.addAdminData(values));
-    onClose();
+    await onClose();
   };
 
   const validateMessages = {
@@ -98,16 +100,17 @@ function DrawerEditForm({ onClose, record }) {
         />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="birthdates"
-        rules={[{ required: true, message: "Please input Birthdate!" }]}
+        // rules={[{ required: true, message: "Please input Birthdate!" }]}
         prefix={<CalendarOutlined className="site-form-item-icon" />}
       >
         <DatePicker
           prefix={<CalendarOutlined className="site-form-item-icon" />}
+          defaultValue={moment(record.birthdate)}
           size="large"
         />
-      </Form.Item>
+      </Form.Item> */}
 
       {/* <Form.Item
         name="password"

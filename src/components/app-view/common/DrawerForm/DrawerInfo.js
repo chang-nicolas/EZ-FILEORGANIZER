@@ -1,6 +1,6 @@
 import React from "react";
 import md5 from "md5";
-import { Card, Avatar, Row, Col } from "antd";
+import { Card, Avatar, Row, Col, Spin } from "antd";
 import {
   EditOutlined,
   EllipsisOutlined,
@@ -19,9 +19,17 @@ import "./style.scss";
 
 const { Meta } = Card;
 
-function DrawInfo({ record, setPanel }) {
+function DrawInfo({ record, setPanel, onClose }) {
   const hash = md5(String(record.email).trim().toLowerCase());
-  const gravatar = `http://www.gravatar.com/avatar/${hash}?s=120&d=404`;
+  const [gravatar, setGravatar] = React.useState(
+    <Spin style={{ margin: "0 auto", marginTop: "30%" }} />
+  );
+  const userGravatar = `http://www.gravatar.com/avatar/${hash}?s=120&d=404`;
+
+  React.useEffect(() => {
+    setGravatar(userGravatar);
+  }, [userGravatar]);
+
   const avatar = (
     <Avatar
       src={gravatar}
@@ -37,7 +45,8 @@ function DrawInfo({ record, setPanel }) {
       }}
     >
       <h1 style={{ color: "white" }}>
-        {record.firstname.charAt(0) + record.lastname.charAt(0)}
+        {record.firstname.charAt(0).toUpperCase() +
+          record.lastname.charAt(0).toUpperCase()}
       </h1>
     </Avatar>
   );
@@ -90,16 +99,20 @@ function DrawInfo({ record, setPanel }) {
       Last Login
     </span>
   );
-  const onEditClick = () => {
-    setPanel("form");
-  };
+
   return (
     <Card
       style={{ width: 300 }}
       cover={avatar}
       actions={[
         <SettingOutlined key="setting" />,
-        <EditOutlined key="edit" onClick={onEditClick} />,
+        <EditOutlined
+          key="edit"
+          onClick={async () => {
+            // await onClose();
+            await setPanel("form");
+          }}
+        />,
         <EllipsisOutlined key="ellipsis" />,
       ]}
     >

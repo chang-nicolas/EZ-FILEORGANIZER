@@ -14,8 +14,8 @@ function DrawerPanel({ showInfo, title, record, panel, setPanel }) {
     setVisible(true);
   }
 
-  function onClose() {
-    setVisible(false);
+  async function onClose() {
+    await setVisible(false);
   }
 
   return (
@@ -38,7 +38,7 @@ function DrawerPanel({ showInfo, title, record, panel, setPanel }) {
         {panel == "form" ? (
           <DrawerForm onClose={onClose} record={record} />
         ) : (
-          <DrawerInfo record={record} setPanel={setPanel} />
+          <DrawerInfo record={record} setPanel={setPanel} onClose={onClose} />
         )}
       </Drawer>
     </>

@@ -16,3 +16,5 @@ const pageLoadingSlice = createSlice({
     },
   },
 });
+
+export default pageLoadingSlice;

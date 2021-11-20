@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Input, Button, Checkbox, Image, DatePicker } from "antd";
+import { Form, Input, Button, Checkbox, Image, DatePicker, Alert } from "antd";
 import {
   UserOutlined,
   LockOutlined,
@@ -16,16 +16,11 @@ import { useHistory } from "react-router-dom";
 
 import * as actions from "../../_redux/auth/authAction";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function RegisterForm({ pageChange }) {
-  const [userData, setUserData] = React.useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phonenumber: "",
-    address: "",
-    password: "",
-  });
+  console.log("registerssss");
+  const [reError, setReError] = React.useState(null);
   const dispatch = useDispatch();
 
   const onFinish = async (values) => {
@@ -33,7 +28,20 @@ function RegisterForm({ pageChange }) {
     values.role = "user";
     console.log("Received values of form: ", values);
     await dispatch(actions.register(values));
-    pageChange("login");
+    gotoLogin();
+  };
+
+  const { error } = useSelector((state) => ({
+    error: state.auth.error,
+  }));
+
+  React.useEffect(async () => {
+    await setReError(error);
+    // gotoLogin();
+  }, [error]);
+  const gotoLogin = () => {
+    console.log(reError);
+    if (!reError) pageChange("login");
   };
 
   const validateMessages = {
@@ -56,6 +64,17 @@ function RegisterForm({ pageChange }) {
       validateMessages={validateMessages}
     >
       <Image width={200} src={logo} />
+      {reError ? (
+        <Alert
+          message="Error"
+          description={reError}
+          type="error"
+          style={{ marginBottom: "30px" }}
+          showIcon
+        />
+      ) : (
+        ""
+      )}
       <Form.Item
         name="firstname"
         rules={[{ required: true, message: "Please input your Firstname!" }]}

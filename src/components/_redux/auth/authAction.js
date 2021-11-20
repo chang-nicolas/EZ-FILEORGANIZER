@@ -19,7 +19,9 @@ export const login = (values) => (dispatch) => {
 };
 
 export const register = (values) => (dispatch) => {
-  return requestFromServer.register(values);
+  return requestFromServer.register(values).then(({ data }) => {
+    if (data.error) dispatch(actions.setError({ error: data.error }));
+  });
 };
 
 export const singOut = () => (dispatch) => {

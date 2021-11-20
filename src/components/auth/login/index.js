@@ -10,6 +10,7 @@ function Login() {
 
   function pageChange(newValue) {
     setPage(newValue);
+    console.log(page);
   }
 
   const style = {
